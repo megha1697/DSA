@@ -1,0 +1,16 @@
+function maxWater(height) {
+    let i= 0;
+    let j= height.length-1;
+    let maxwater=0
+    while(i<j){
+        let containerLen = j-i;
+        let containerHeight = Math.min(height[i], height[j]);
+        maxwater = Math.max(maxwater,containerLen*containerHeight);
+        if(height[i]<height[j]) {i++;}
+        else {j--;}
+    }
+    return maxwater
+}
+
+console.log(maxWater([1,8,6,2,5,4,8,3,7]))
+console.log(maxWater([1,1]))
