@@ -1,0 +1,11 @@
+traversal techniques
+BFS
+DFS
+
+DFS
+Inorder (left root right)
+preorder (root left right)
+postorder (left right root)
+
+
+BFS : level order

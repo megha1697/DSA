@@ -1,0 +1,15 @@
+2 ways to solve DB problems:
+1) Tabulation - Bottom up
+2) Memoization - Top down - tend to store the value of subproblems in a map/table
+
+Types of problems 
+overlapping sub problems : example - fibonacci series
+Count the total number of ways
+Try all possible ways 
+Find best way
+
+
+Shortcut trick
+Represent the problem in the form of index
+Do all possible operations on that index
+max/min of all operations 
