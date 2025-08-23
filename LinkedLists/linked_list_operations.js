@@ -45,3 +45,22 @@ head.next.next = new ListNode(15);
 head.next.next.next = new ListNode(2);
 
 console.log("Delete key from linked list: ",deleteKey(head, 10));
+
+function reverse(head){
+    let temp = head
+    let prev = null;
+    while ( temp !== null){
+        let front =temp.next
+        temp.next = prev
+        prev = temp
+        temp = front
+    }
+    return prev;
+}
+
+let headR = new ListNode(5);
+headR.next = new ListNode(10);
+headR.next.next = new ListNode(15);
+headR.next.next.next = new ListNode(2);
+
+console.log('reverse',reverse(headR));
