@@ -1,0 +1,49 @@
+function findSubarraySum(arr) {
+    // code here
+    let sum = 0;
+    let maxi = Number.MIN_SAFE_INTEGER
+    let res = [];
+    for (let i = 0; i < arr.length; i++) {
+        sum = sum + arr[i]
+        if (sum > maxi) {
+            res.push(arr[i])
+            maxi = sum
+        }
+        if (sum < 0) sum = 0;
+    }
+    return maxi;
+}
+
+console.log(findSubarraySum([1, 2, 5, -7, 2, 6]));
+
+
+function findSubarray(arr) {
+    // code here
+    let sum = 0;
+    let maxi = Number.MIN_SAFE_INTEGER
+    let start = 0;
+    let finalStart = 0;
+    let end = 0;
+    for(let i=0;i<arr.length;i++) {
+        if (arr[i] < 0) { 
+            start=i+1;
+            sum=0;
+            continue;
+        }
+        sum = sum + arr[i];
+        if (sum > maxi|| (sum === maxi && (i-start > end-finalStart))) {
+            maxi = sum
+            finalStart=start
+            end=i
+        }
+    }
+    console.log(finalStart, end);
+    
+    let res=[];
+    for(let i=finalStart; i<=end;i++){
+        res.push(arr[i])
+    }
+    return res;
+}
+
+console.log(findSubarray([1, 2, 5, -7, 2, 6]));

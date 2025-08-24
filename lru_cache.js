@@ -15,70 +15,77 @@ put (key, value): Update the value of the key if that key exists, Otherwise,
 add a key-value pair to the cache. If the number of keys exceeds the capacity of the LRU cache
  then dismiss the least recently used key */
 
-
-class Node{
+class Node {
     constructor(key, value) {
-        this.key=key;
-        this.value=value;
-        this.next=null;
-        this.prev=null;
+        this.key = key;
+        this.value = value;
+        this.prev = null;
+        this.next = null;
     }
 }
-
-class LRU{
-    constructor(capacity){
-        this.capacity=capacity
-        this.cache=new Map()
-        this.head = new Node(-1,-1)
-        this.tail = new Node(-1,-1)
+class LRU {
+    constructor(capacity) {
+        this.capacity = capacity;
+        this.map = new Map();
+        this.head = new Node(-1, -1)
+        this.tail = new Node(-1, -1)
         this.head.next=this.tail
         this.tail.prev=this.head
     }
-    addNode(node){
-        const nextNode = this.head.next;
-        this.head.next = node
-        node.prev = this.head
-        node.next=nextNode
-        nextNode.prev = node
+
+    remove(node) {
+        const prevNode = node.prev;
+        const nextNode = node.next;
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
     }
-    remove(node){
-        const prevNode = node.prev
-        const nextNode = node.next
-        prevNode.next = nextNode
-        nextNode.prev = prevNode
+
+    add(node) {
+        const headNext = this.head.next;
+        this.head.next = node;
+        node.prev = this.head;
+        node.next= headNext;
+        headNext.prev = node
     }
+
     get(key) {
-        if(!this.cache.has(key)) {return -1}
-        const node =this.cache.get(key);
-        this.remove(node);
-        this.addNode(node);
-        return node.value;
+        if (!this.map.has(key)) return -1
+        const node = this.map.get(key);
+        console.log(node);
+        
+        this.remove(node)
+        this.add(node)
+        return node.value
     }
 
     put(key, value) {
-        if(this.cache.has(key)) {
-            const node  = this.cache.get(key)
-            this.remove(node);
-            this.cache.delete(key)
-        } 
-        if (this.cache.size >= this.capacity){
-            const lru = this.tail.prev;
-            this.remove(lru)
-            this.cache.delete(lru)
+        if (this.map.has(key)) {
+            let node = this.map.get(key)
+            this.remove(node)
+            this.add(node)
+        } else {
+            if (this.map.size === this.capacity) {
+                let node = this.tail.prev;
+                this.map.delete(key)
+                this.remove(node)
+            }
+            let newnode = new Node(key, value);
+        this.add(newnode);
+        this.map.set(key, newnode)
         }
-        const node = new Node(key, value);
-        this.addNode(node);
-        this.cache.set(key, node)
+        
+
     }
 }
 
-const cache = new LRU(2);
-cache.put(1, 1);
-cache.put(2, 2);
-console.log(cache.get(1));
-cache.put(3, 3);
-console.log(cache.get(2));
-cache.put(4, 4);
-console.log(cache.get(1));
-console.log(cache.get(3));
-console.log(cache.get(4));
+
+let lRUCache = new LRU(2);
+lRUCache.put(1, 1); // cache is {1=1}
+lRUCache.put(2, 2); // cache is {1=1, 2=2}
+lRUCache.get(1);    // return 1
+lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+lRUCache.get(2);    // returns -1 (not found)
+lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+lRUCache.get(1);    // return -1 (not found)
+lRUCache.get(3);    // return 3
+lRUCache.get(4);
