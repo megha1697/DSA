@@ -10,8 +10,6 @@ var lengthOfLongestSubstring = function(s) {
     let len =0;
     let map = new Map();
     while(right<s.length){
-        console.log(map.has(s[right]));
-        
         if(map.has(s[right])){
             if(map.get(s[right]) >= left)
                 left=map.get(s[right])+1;

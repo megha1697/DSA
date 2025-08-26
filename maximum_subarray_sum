@@ -37,7 +37,6 @@ function findSubarray(arr) {
             end=i
         }
     }
-    console.log(finalStart, end);
     
     let res=[];
     for(let i=finalStart; i<=end;i++){

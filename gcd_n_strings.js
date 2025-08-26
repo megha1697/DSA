@@ -4,7 +4,6 @@ function findgcd(str1, str2) {
     }
     else if (!(str1.startsWith(str2))) {
         return ''
-        
     }
     else if (str2.length === 0) {
         return str1
@@ -29,12 +28,12 @@ function gcdStrings(a, b){
         return ""
     }
     while(b.length>0){
-        const tmp =b
+        const tmp=b
         b=a%b
         a=tmp
         if(b.length>0){
             a=b
-            b = tmp.substr(tmp.length-b.length)
+            b=tmp.substr(tmp.length-b.length)
         }
     }
     return a;

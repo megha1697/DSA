@@ -29,8 +29,8 @@ class LRU {
         this.map = new Map();
         this.head = new Node(-1, -1)
         this.tail = new Node(-1, -1)
-        this.head.next=this.tail
-        this.tail.prev=this.head
+        this.head.next = this.tail
+        this.tail.prev = this.head
     }
 
     remove(node) {
@@ -44,7 +44,7 @@ class LRU {
         const headNext = this.head.next;
         this.head.next = node;
         node.prev = this.head;
-        node.next= headNext;
+        node.next = headNext;
         headNext.prev = node
     }
 
@@ -52,7 +52,7 @@ class LRU {
         if (!this.map.has(key)) return -1
         const node = this.map.get(key);
         console.log(node);
-        
+
         this.remove(node)
         this.add(node)
         return node.value
@@ -70,11 +70,9 @@ class LRU {
                 this.remove(node)
             }
             let newnode = new Node(key, value);
-        this.add(newnode);
-        this.map.set(key, newnode)
+            this.add(newnode);
+            this.map.set(key, newnode)
         }
-        
-
     }
 }
 

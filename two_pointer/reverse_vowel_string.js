@@ -4,10 +4,10 @@ function reverse(s){
     let j=s.length-1;
     let arr=s.split('');
     while(i<j){
-        while(i<j && !vowels.includes(arr[i].toLowerCase())){
+        if(i<j && !vowels.includes(arr[i].toLowerCase())){
             i++
         }
-        while(i<j && !vowels.includes(arr[j].toLowerCase())){
+        if(i<j && !vowels.includes(arr[j].toLowerCase())){
             j--
         }
         [arr[i], arr[j]] = [arr[j], arr[i]]

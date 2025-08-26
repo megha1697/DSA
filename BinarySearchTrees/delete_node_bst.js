@@ -8,14 +8,14 @@ class Node {
 
 function deleteNode(root, val){
     if(root === null) return;
-    let curr = JSON.parse(JSON.stringify(root))
+    let curr = root
     if(root.val === val){
         return helper(root)
     }
     
     while(root != null){
-        if(root.value > val){
-            if(root.left !==null && root.left.val === val){
+        if(root.val > val){
+            if(root.left !== null && root.left.val === val){
             root.left = helper(root.left)
         } else {
             root = root.left
@@ -60,4 +60,4 @@ node1.left.left.right.right = new Node(8);
 node1.left.left.left.left = new Node(2);
 node1.left.left.left.right = new Node(4);
 node1.left.left.left.left.left = new Node(1);
-console.log(JSON.stringify(deleteNode(node1, 13)))
+console.log(JSON.stringify(deleteNode(node1, 9)))
