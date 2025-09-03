@@ -47,6 +47,8 @@ head.next.next.next = new ListNode(2);
 console.log("Delete key from linked list: ",deleteKey(head, 10));
 
 function reverse(head){
+    if(head === null) return null
+    if(head.next === null) return head;
     let temp = head
     let prev = null;
     while ( temp !== null){
